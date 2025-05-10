@@ -68,8 +68,8 @@ DATABASE_URL="postgresql://user:password@localhost:5432/your_database_name"
 
 # Authentication
 JWT_SECRET="your-secret-key-for-jwt-tokens"
-NEXTAUTH_URL="http://localhost:3000"
-NEXTAUTH_SECRET="your-nextauth-secret-key"
+AUTH_SECRET="your-nextauth-secret-key"
+AUTH_TRUST_HOST="true"
 
 # API Configuration
 NEXT_PUBLIC_API_URL="http://localhost:3000/api"
@@ -83,8 +83,8 @@ NEXT_PUBLIC_API_URL="http://localhost:3000/api"
 
 - `DATABASE_URL`: Your PostgreSQL database connection string
 - `JWT_SECRET`: Secret key used for signing JWT tokens
-- `NEXTAUTH_URL`: The base URL of your application
-- `NEXTAUTH_SECRET`: Secret key used by NextAuth.js for encryption
+- `AUTH_SECRET`: Secret key used by NextAuth.js for encryption
+- `AUTH_TRUST_HOST`: Set to "true" to trust the host header (useful for some deployment scenarios, e.g., behind proxies or on Vercel)
 - `NEXT_PUBLIC_API_URL`: The base URL for your API endpoints
 - `NODE_ENV`: Set to "production" in production environment
 - `VERCEL_URL`: Your Vercel deployment URL (if using Vercel)

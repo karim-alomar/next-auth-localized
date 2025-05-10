@@ -1,7 +1,7 @@
 import { getUserByEmail } from "@/app/actions/auth/getUserByEmail";
 import { ACCEPT_LANGUAGE_KEY } from "@/global";
 import { getDictionary } from "@/utils";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (req: NextRequest) => {

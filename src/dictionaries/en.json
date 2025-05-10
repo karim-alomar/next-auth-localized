@@ -1,0 +1,50 @@
+{
+  "common": {
+    "welcome": "Welcome",
+    "please_wait": "Please wait"
+  },
+  "auth": {
+    "title": "Auth",
+    "email": "Email",
+    "password": "Password",
+    "login": "Login",
+    "register": "Register",
+    "enter_account_details": "Enter your account details",
+    "forgot_password": "Forgot your password?",
+    "dont_have_account": "Don't have an account?",
+    "sign_up": "Sign up",
+    "already_have_account": "Already have an account?",
+    "welcome_back": "Welcome back",
+    "welcome_back_description": "Enter your account details to login to the platform",
+    "welcome_to_platform": "Welcome to the platform",
+    "full_name": "Full name",
+    "logout": "Logout",
+    "reset_password": "Reset password",
+    "enter_your_email": "Enter your email",
+    "back_to_login": "Back to login",
+    "validate_email": "Validate email",
+    "validate_email_description": "Enter the email you registered with on the platform",
+    "alerts": {
+      "email_and_password_are_required": "Email and password are required",
+      "invalid_credentials": "Invalid credentials",
+      "invalid_password": "Invalid password",
+      "success_login": "Successfully logged in",
+      "success_login_description": "You have successfully logged in. Please continue.",
+      "user_already_exists": "User already exists",
+      "success_register": "Successfully registered",
+      "success_register_description": "You have successfully registered. Please login to continue.",
+      "user_not_found": "User not found",
+      "the_account_has_been_verified_successfully": "The account has been verified successfully",
+      "password_is_required": "Password is required",
+      "password_reset_successfully": "Password reset successfully",
+      "password_reset_successfully_description": "You have successfully reset your password. Please login to continue."
+    }
+  },
+  "inputs": {
+    "the_name_is_required": "The name is required",
+    "email_is_invalid": "The email is invalid",
+    "password_uppercase_validation": "The password must contain an uppercase letter",
+    "password_number_validation": "The password must contain a number",
+    "password_error_message": "The password must be at least 8 characters long"
+  }
+}

@@ -1,4 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<p align="center">
+  <img src="public/login-preview.png" alt="Login Page Preview" width="700"/>
+</p>
+
+# Next.js Authentication with Localization
+
+This is a [Next.js](https://nextjs.org) project that implements a robust authentication system with multi-language support. The application provides a secure and user-friendly authentication experience with the following features:
+
+## Features
+
+- 🔐 **Authentication System**
+  - User registration and login
+  - Password reset functionality
+  - JWT-based authentication
+  - Protected routes
+  - Session management
+
+- 🌐 **Multi-language Support**
+  - Dynamic language switching
+  - Localized authentication messages
+  - Language persistence using cookies
+
+- 🎨 **Modern UI/UX**
+  - Responsive design
+  - Beautiful authentication pages
+  - Form validation
+  - Toast notifications for user feedback
+
+- 🔒 **Security**
+  - Password hashing with bcrypt
+  - JWT token-based authentication
+  - Secure session management
+  - Protected API routes
+
+## Tech Stack
+
+- **Framework**: Next.js 15.3.2
+- **Authentication**: NextAuth.js 5.0.0-beta.27
+- **Database**: PostgreSQL with Prisma ORM
+- **Styling**: Tailwind CSS
+- **Form Handling**: React Hook Form with Zod validation
+- **State Management**: React Query
+- **UI Components**: Custom components with Radix UI primitives
 
 ## Getting Started
 
@@ -16,9 +58,36 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env` file in the root directory with the following variables:
+
+```env
+# Database Configuration
+DATABASE_URL="postgresql://user:password@localhost:5432/your_database_name"
+
+# Authentication
+JWT_SECRET="your-secret-key-for-jwt-tokens"
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="your-nextauth-secret-key"
+
+# API Configuration
+NEXT_PUBLIC_API_URL="http://localhost:3000/api"
+
+# Optional: For Production
+# NODE_ENV="production"
+# VERCEL_URL="your-vercel-url" # If deploying to Vercel
+```
+
+### Environment Variables Description
+
+- `DATABASE_URL`: Your PostgreSQL database connection string
+- `JWT_SECRET`: Secret key used for signing JWT tokens
+- `NEXTAUTH_URL`: The base URL of your application
+- `NEXTAUTH_SECRET`: Secret key used by NextAuth.js for encryption
+- `NEXT_PUBLIC_API_URL`: The base URL for your API endpoints
+- `NODE_ENV`: Set to "production" in production environment
+- `VERCEL_URL`: Your Vercel deployment URL (if using Vercel)
 
 ## Learn More
 

@@ -2,7 +2,11 @@ import { auth } from "@/auth";
 import { LogoutButton } from "@/components/common/LogoutButton";
 import { getDictionary } from "@/utils";
 
-export default async function Home({ params }: { params: { lang: string } }) {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}) {
   const { lang } = await params;
   const dictionary = await getDictionary(lang);
   const session = await auth();

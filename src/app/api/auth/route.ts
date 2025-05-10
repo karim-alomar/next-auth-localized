@@ -11,14 +11,14 @@ export const GET = async (req: NextRequest) => {
     if (!session) {
       throw new Error(dictionary.auth.alerts.user_not_found);
     }
-    return {
+    return NextResponse.json({
       data: session.user,
       message: {
         success: {
           title: dictionary.auth.alerts.success_login,
         },
       },
-    };
+    });
   } catch (error) {
     if (error instanceof Error) {
       return NextResponse.json(

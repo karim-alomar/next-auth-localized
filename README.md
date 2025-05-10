@@ -56,7 +56,7 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [https://next-auth-localized.vercel.app/](https://next-auth-localized.vercel.app/) with your browser to see the result.
 
 ## Environment Variables
 

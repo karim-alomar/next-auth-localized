@@ -177,7 +177,7 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../../../.env"
   },
   "relativePath": "../../..",
@@ -187,11 +187,12 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://next-auth-localized_owner:npg_8wSWtKBZ0Hgz@ep-flat-flower-a4tl7p6j-pooler.us-east-1.aws.neon.tech/next-auth-localized?sslmode=require"
+        "value": null
       }
     }
   },

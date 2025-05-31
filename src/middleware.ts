@@ -28,9 +28,9 @@ export default auth(async (request) => {
 
   (await cookies()).set("locale", locale);
 
-  // if (!pathnameHasLocale) {
-  //   request.nextUrl.pathname = `/${locale}${pathname}`;
-  // }
+  if (!pathnameHasLocale) {
+    request.nextUrl.pathname = `/${"ar"}${pathname}`;
+  }
 
   if (!isLoggedIn && isProtectedRoute && !isAuthRoute) {
     return NextResponse.redirect(

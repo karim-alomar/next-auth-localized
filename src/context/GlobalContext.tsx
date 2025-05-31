@@ -2,6 +2,7 @@
 import { Toaster } from "@/components";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SessionProvider } from "next-auth/react";
+import { ThemeProvider } from "next-themes";
 import { usePathname } from "next/navigation";
 import { ReactNode, createContext, useEffect, useMemo, useState } from "react";
 
@@ -76,15 +77,15 @@ export const GlobalProvider = ({
         {/* <AuthProvider> */}
         {/* <AppProvider> */}
         <GlobalContext.Provider value={value}>
-          {/* <ThemeProvider
-                      attribute="class"
-                      defaultTheme="system"
-                      enableSystem
-                      disableTransitionOnChange
-                    > */}
-          {client && children}
-          <Toaster closeButton={false} />
-          {/* </ThemeProvider> */}
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {client && children}
+            <Toaster closeButton={false} />
+          </ThemeProvider>
         </GlobalContext.Provider>
         {/* </AppProvider> */}
         {/* </AuthProvider> */}

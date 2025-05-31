@@ -25,7 +25,7 @@ export const SubmitButton = ({
     <Button
       type="submit"
       disabled={disabled || isSendProtected}
-      className={cn("w-full cursor-pointer", className)}
+      className={cn("w-full cursor-pointer text-primary", className)}
       onClick={(e) => {
         if (isSendProtected || disabled) {
           e.preventDefault();

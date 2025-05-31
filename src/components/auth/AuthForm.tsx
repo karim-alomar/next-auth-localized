@@ -70,8 +70,8 @@ export const AuthForm = ({ formType }: Props) => {
     });
   };
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex-1 flex flex-col h-full items-start justify-center p-6 gap-2 w-3/4 mx-auto">
+    <div className="flex flex-col flex-1">
+      <div className="flex-1 flex flex-col items-start justify-center p-6 gap-2 w-3/4 mx-auto">
         <span className="font-extrabold text-4xl">
           {formType === "login"
             ? dictionary.auth.login
@@ -126,14 +126,14 @@ export const AuthForm = ({ formType }: Props) => {
           </form>
         </Form>
       </div>
-      <div className="flex items-center justify-center gap-10 mb-16">
+      <div className="flex items-center justify-center gap-10 mb-10">
         <span className="text-white/50 text-sm">
           {formType === "login"
             ? dictionary.auth.dont_have_account
             : dictionary.auth.already_have_account}
         </span>
         <Link href={formType === "login" ? REGISTER_ROUTE : LOGIN_ROUTE}>
-          <Button className="bg-zinc-700 text-sm rounded-sm" size="sm">
+          <Button className="text-sm rounded-sm" size="sm">
             {formType === "login"
               ? dictionary.auth.sign_up
               : dictionary.auth.login}

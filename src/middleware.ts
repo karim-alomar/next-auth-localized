@@ -28,14 +28,14 @@ export default auth(async (request) => {
 
   (await cookies()).set("locale", locale);
 
-  if (!pathnameHasLocale) {
-    request.nextUrl.pathname = `/${"ar"}${pathname}`;
-  }
+  if (pathnameHasLocale) return;
+
+  request.nextUrl.pathname = `/${locale}${pathname}`;
 
   if (!isLoggedIn && isProtectedRoute && !isAuthRoute) {
     return NextResponse.redirect(
       new URL(
-        `${LOGIN_ROUTE.trim()}${
+        `/${locale}${LOGIN_ROUTE.trim()}${
           pathname.length > 3
             ? `?callbackUrl=${encodeURIComponent(pathname)}`
             : ""
@@ -48,7 +48,6 @@ export default auth(async (request) => {
   if (isLoggedIn && isAuthRoute) {
     return NextResponse.redirect(new URL(DEFAULT_ROUTE, request.url));
   }
-  if (pathnameHasLocale) return;
   return NextResponse.redirect(request.nextUrl);
 });
 

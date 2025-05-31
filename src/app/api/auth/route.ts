@@ -1,12 +1,12 @@
 import { auth } from "@/auth";
+import { ACCEPT_LANGUAGE_KEY } from "@/global";
 import { getDictionary } from "@/utils/getDictionary";
-import { getLocale } from "@/utils/getLocale";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req: NextRequest) => {
   try {
     const session = await auth();
-    const locale = getLocale(req);
+    const locale = req.headers.get(ACCEPT_LANGUAGE_KEY)!;
     const dictionary = await getDictionary(locale);
     if (!session) {
       throw new Error(dictionary.auth.alerts.user_not_found);

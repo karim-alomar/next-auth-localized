@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import { hasIncludedPath } from "@/utils";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import {
   authRoutes,
@@ -9,7 +10,7 @@ import {
   PUBLIC_FILES,
 } from "./routes";
 import { getLocale, locales } from "./utils/getLocale";
-import { cookies } from "next/headers";
+
 export default auth(async (request) => {
   const isLoggedIn = !!request.auth;
   const { pathname, searchParams } = request.nextUrl;
@@ -26,10 +27,9 @@ export default auth(async (request) => {
   }
 
   (await cookies()).set("locale", locale);
-
-  if (pathnameHasLocale) return;
-
-  request.nextUrl.pathname = `/${locale}${pathname}`;
+  if (!pathnameHasLocale) {
+    request.nextUrl.pathname = `/${locale}${pathname}`;
+  }
 
   if (!isLoggedIn && isProtectedRoute && !isAuthRoute) {
     return NextResponse.redirect(
@@ -47,6 +47,7 @@ export default auth(async (request) => {
   if (isLoggedIn && isAuthRoute) {
     return NextResponse.redirect(new URL(DEFAULT_ROUTE, request.url));
   }
+  if (pathnameHasLocale) return;
   return NextResponse.redirect(request.nextUrl);
 });
 

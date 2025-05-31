@@ -13,19 +13,26 @@ import { locales } from "@/utils/getLocale";
 import Cookies from "js-cookie";
 import { Globe } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ReactNode, useContext } from "react";
 interface Props {
   children: ReactNode;
 }
 const Template = ({ children }: Props) => {
   const pathname = usePathname();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const { lang } = useContext(GlobalContext);
   const dictionary = clientGetDictionary();
-  const pathnameWithoutParams = pathname.slice(3);
   const callbackUrl = searchParams.get("callbackUrl") as string;
+  const handleLanguageChange = (newLang: string) => {
+    Cookies.set("locale", newLang);
+    const newPath = `/${newLang}${pathname.replace(/^\/(ar|en)/, "")}${
+      callbackUrl ? `?callbackUrl=${callbackUrl}` : ""
+    }`;
+    router.push(newPath);
+  };
+
   return (
     <div className="grid grid-cols-12 w-full h-full">
       <div className="bg-auth-background md:col-span-4 col-span-12 z-20">
@@ -42,20 +49,12 @@ const Template = ({ children }: Props) => {
                 {locales
                   .filter((l) => l !== lang)
                   .map((l) => (
-                    <Link
-                      href={`/${l}${pathnameWithoutParams}${
-                        callbackUrl ? `?callbackUrl=${callbackUrl}` : ""
-                      }`}
+                    <DropdownMenuItem
                       key={l}
+                      onClick={() => handleLanguageChange(l)}
                     >
-                      <DropdownMenuItem
-                        onClick={() => {
-                          Cookies.set("locale", l);
-                        }}
-                      >
-                        {locales.find((l) => l !== lang)}
-                      </DropdownMenuItem>
-                    </Link>
+                      {locales.find((l) => l !== lang)}
+                    </DropdownMenuItem>
                   ))}
               </DropdownMenuGroup>
             </DropdownMenuContent>

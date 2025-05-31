@@ -1,6 +1,5 @@
 import { auth } from "@/auth";
 import { hasIncludedPath } from "@/utils";
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import {
   authRoutes,
@@ -10,7 +9,7 @@ import {
   PUBLIC_FILES,
 } from "./routes";
 import { getLocale, locales } from "./utils/getLocale";
-
+import { cookies } from "next/headers";
 export default auth(async (request) => {
   const isLoggedIn = !!request.auth;
   const { pathname, searchParams } = request.nextUrl;

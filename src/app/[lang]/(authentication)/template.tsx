@@ -13,25 +13,19 @@ import { locales } from "@/utils/getLocale";
 import Cookies from "js-cookie";
 import { Globe } from "lucide-react";
 import Image from "next/image";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
 import { ReactNode, useContext } from "react";
 interface Props {
   children: ReactNode;
 }
 const Template = ({ children }: Props) => {
   const pathname = usePathname();
-  const router = useRouter();
   const searchParams = useSearchParams();
   const { lang } = useContext(GlobalContext);
   const dictionary = clientGetDictionary();
+  const pathnameWithoutParams = pathname.slice(3);
   const callbackUrl = searchParams.get("callbackUrl") as string;
-  const handleLanguageChange = (newLang: string) => {
-    Cookies.set("locale", newLang);
-    const newPath = `/${newLang}${pathname.replace(/^\/(ar|en)/, "")}${
-      callbackUrl ? `?callbackUrl=${callbackUrl}` : ""
-    }`;
-    router.push(newPath);
-  };
 
   return (
     <div className="grid grid-cols-12 w-full h-full">
@@ -49,12 +43,19 @@ const Template = ({ children }: Props) => {
                 {locales
                   .filter((l) => l !== lang)
                   .map((l) => (
-                    <DropdownMenuItem
+                    <Link
+                      href={`/${l}${pathnameWithoutParams}${
+                        callbackUrl ? `?callbackUrl=${callbackUrl}` : ""
+                      }`}
                       key={l}
-                      onClick={() => handleLanguageChange(l)}
+                      onClick={() => {
+                        Cookies.set("locale", l);
+                      }}
                     >
-                      {locales.find((l) => l !== lang)}
-                    </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        {locales.find((l) => l !== lang)}
+                      </DropdownMenuItem>
+                    </Link>
                   ))}
               </DropdownMenuGroup>
             </DropdownMenuContent>

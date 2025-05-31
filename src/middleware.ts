@@ -17,25 +17,20 @@ export default auth(async (request) => {
   const isAuthRoute = hasIncludedPath(pathname, authRoutes);
   const isProtectedRoute = hasIncludedPath(pathname, protectedPaths);
   const isApiRoute = pathname.startsWith("/api/");
-  const cookieStore = cookies();
-  const rawLocale = (await cookieStore).get("locale")?.value;
-  const locale = rawLocale ?? getLocale(request);
-  // const locale = (await cookies()).get("locale")?.value ?? getLocale(request);
+  const locale = (await cookies()).get("locale")?.value ?? getLocale(request);
   const pathnameHasLocale = locales.some(
-    (loc) => pathname.startsWith(`/${loc}/`) || pathname === `/${loc}`
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
 
   if (PUBLIC_FILES.test(pathname) || isApiRoute) {
     return NextResponse.next();
   }
 
-  (await cookieStore).set("locale", locale);
+  (await cookies()).set("locale", locale);
 
-  if (!pathnameHasLocale) {
-    const newUrl = request.nextUrl.clone();
-    newUrl.pathname = `/${locale}${pathname}`;
-    return NextResponse.redirect(newUrl);
-  }
+  // if (!pathnameHasLocale) {
+  //   request.nextUrl.pathname = `/${locale}${pathname}`;
+  // }
 
   if (!isLoggedIn && isProtectedRoute && !isAuthRoute) {
     return NextResponse.redirect(
@@ -53,9 +48,10 @@ export default auth(async (request) => {
   if (isLoggedIn && isAuthRoute) {
     return NextResponse.redirect(new URL(DEFAULT_ROUTE, request.url));
   }
-
-  return NextResponse.next();
+  if (pathnameHasLocale) return;
+  return NextResponse.redirect(request.nextUrl);
 });
+
 export const config = {
   matcher: [
     "/((?!api|_next/static|_next/image|_next/images|assets|favicon.ico|sw.js).*)",

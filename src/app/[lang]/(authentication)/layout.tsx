@@ -19,14 +19,13 @@ import { ReactNode, useContext } from "react";
 interface Props {
   children: ReactNode;
 }
-const Template = ({ children }: Props) => {
+const Layout = ({ children }: Props) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { lang } = useContext(GlobalContext);
   const dictionary = clientGetDictionary();
   const pathnameWithoutParams = pathname.slice(3);
   const callbackUrl = searchParams.get("callbackUrl") as string;
-
   return (
     <div className="grid grid-cols-12 w-full h-full">
       <div className="bg-auth-background md:col-span-4 col-span-12 z-20">
@@ -94,4 +93,5 @@ const Template = ({ children }: Props) => {
     </div>
   );
 };
-export default Template;
+
+export default Layout;

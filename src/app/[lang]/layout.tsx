@@ -1,8 +1,6 @@
 import { GlobalProvider } from "@/context/GlobalContext";
-import { LOCALE_KEY } from "@/global";
 import type { Metadata } from "next";
 import { Cairo, Poppins } from "next/font/google";
-import { cookies } from "next/headers";
 import "../globals.css";
 const cairo = Cairo({
   variable: "--font-cairo",
@@ -22,13 +20,12 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-}: // params,
-Readonly<{
+  params,
+}: Readonly<{
   children: React.ReactNode;
-  // params: { lang: string };
+  params: { lang: string };
 }>) {
-  const lang = (await cookies()).get(LOCALE_KEY)?.value;
-  // const { lang } = await params;
+  const { lang } = await params;
 
   return (
     <html
@@ -41,7 +38,7 @@ Readonly<{
           lang === "ar" ? cairo.className : poppins.className
         } antialiased`}
       >
-        <GlobalProvider lang={lang!}>{children}</GlobalProvider>
+        <GlobalProvider lang={lang}>{children}</GlobalProvider>
       </body>
     </html>
   );

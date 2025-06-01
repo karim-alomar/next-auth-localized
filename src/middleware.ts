@@ -27,6 +27,7 @@ export default auth(async (request) => {
   }
 
   (await cookies()).set("locale", locale);
+
   if (!pathnameHasLocale) {
     request.nextUrl.pathname = `/${locale}${pathname}`;
   }

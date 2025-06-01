@@ -35,7 +35,7 @@ export default auth(async (request) => {
   if (!isLoggedIn && isProtectedRoute && !isAuthRoute) {
     return NextResponse.redirect(
       new URL(
-        `/${locale}${LOGIN_ROUTE.trim()}${
+        `/${LOGIN_ROUTE.trim()}${
           pathname.length > 3
             ? `?callbackUrl=${encodeURIComponent(pathname)}`
             : ""

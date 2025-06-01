@@ -19,7 +19,7 @@ import { ReactNode, useContext } from "react";
 interface Props {
   children: ReactNode;
 }
-const Layout = ({ children }: Props) => {
+const Template = ({ children }: Props) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { lang } = useContext(GlobalContext);
@@ -94,4 +94,4 @@ const Layout = ({ children }: Props) => {
   );
 };
 
-export default Layout;
+export default Template;
